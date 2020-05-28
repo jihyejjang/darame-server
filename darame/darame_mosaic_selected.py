@@ -58,12 +58,12 @@ def mosaicImage(foreground,rois,classIds,index):
     Image.fromarray(foreground.astype(np.uint8)).save('output/display_result_of_mosaic.png')
 
 def main():
-    foreground_path = 'img/foreground'
+    img_path = 'img/mosaic'
     masks, rois, classIds = load_npz()
     X,Y = (100,100)
     index = pos_inBox(X,Y,rois)
-    foreground = load_images(foreground_path)
-    mosaicImage(foreground,rois,classIds,index)
+    img = load_images(img_path)
+    mosaicImage(img,rois,classIds,index)
     
 if __name__== "__main__":
     main()
