@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[29]:
+# In[86]:
 
 
 import numpy as np
@@ -20,15 +20,15 @@ def load_npz():
     rois=load_results['rois']
     classIds=load_results['classId']
     return masks, rois, classIds
-
-def pos_inBox(X,Y,rois):
+ 
+def pos_inMask(X,Y,masks):
     cnt=0
-    for box in rois:
-        if ((box[1]<X<box[3]) and (box[0]<Y<box[2])) :
+    for mask in masks[Y,X]:
+        if (mask==True) :
             return cnt
         cnt +=1
         
-        assert cnt==len(rois), "다시 터치하세요" # 에러메세지 전달해야됨
+    assert cnt==len(masks[0][0]), "다시 터치하세요" # 에러메세지 전달해야됨
 
 def load_images(foreground_path):
     try:
@@ -58,10 +58,11 @@ def mosaicImage(foreground,rois,classIds,index):
     Image.fromarray(foreground.astype(np.uint8)).save('output/display_result_of_mosaic.png')
 
 def main():
-    img_path = 'img/mosaic'
+    img_path = 'img/foreground'
     masks, rois, classIds = load_npz()
-    X,Y = (100,100)
-    index = pos_inBox(X,Y,rois)
+    X = 200
+    Y = 300
+    index = pos_inMask(X,Y,masks)
     img = load_images(img_path)
     mosaicImage(img,rois,classIds,index)
     

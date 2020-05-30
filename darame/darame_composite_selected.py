@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[13]:
+# In[1]:
 
 
 import cv2
@@ -18,14 +18,14 @@ def load_npz():
     classIds=load_results['classId']
     return masks, rois, classIds
 
-def pos_inBox(X,Y,rois):
+def pos_inMask(X,Y,masks):
     cnt=0
-    for box in rois:
-        if ((box[1]<X<box[3]) and (box[0]<Y<box[2])) :
+    for mask in masks[Y,X]:
+        if (mask==True) :
             return cnt
         cnt +=1
         
-        assert cnt==len(rois), "다시 터치하세요" # 에러메세지 전달해야됨
+    assert cnt==len(masks[0][0]), "다시 터치하세요" # 에러메세지 전달해야됨
 
 def load_images(background_path, foreground_path):
     try:
@@ -96,10 +96,10 @@ def main():
     foreground_path = 'img/foreground'
     masks, rois, classIds = load_npz()
 
-    X,Y = (100,100) # 지금은 임의의 값을 지정했지만, 안드로이드 소켓통신으로 User가 터치한 좌표를 전달받아야 함
-    index = pos_inBox(X,Y,rois)
+    X,Y = (300,200) # 지금은 임의의 값을 지정했지만, 안드로이드 소켓통신으로 User가 터치한 좌표를 전달받아야 함
+    index = pos_inMask(X,Y,masks)
     foreground,background = load_images(background_path, foreground_path)
-    mask_selected = select_mask(index, masks)
+    mask_selected = select_mask(index,masks)
     
     compositeImages(background,foreground,mask_selected)
 
