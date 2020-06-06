@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[86]:
+# In[2]:
 
 
 import numpy as np
 import cv2
 import numpy as np
-import glob
 from PIL import Image
 from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
@@ -30,16 +29,11 @@ def pos_inMask(X,Y,masks):
         
     assert cnt==len(masks[0][0]), "다시 터치하세요" # 에러메세지 전달해야됨
 
-def load_images(foreground_path):
-    try:
-        foreground= glob.glob(foreground_path+'/*.jpg')[0]
-    except:
-        foreground= glob.glob(foreground_path+'/*.png')[0]
+def load_images():
+    img = load_img('img/mosaic.png')
+    img = img_to_array(img)
 
-    foreground = load_img(foreground)
-    foreground = img_to_array(foreground)
-
-    return foreground
+    return img
 
 def mosaicImage(foreground,rois,classIds,index):
     cnt=0
@@ -57,16 +51,15 @@ def mosaicImage(foreground,rois,classIds,index):
     pyplot.imshow(foreground.astype(np.uint8))
     Image.fromarray(foreground.astype(np.uint8)).save('output/display_result_of_mosaic.png')
 
-def main():
-    img_path = 'img/foreground'
+def main(X,Y):
     masks, rois, classIds = load_npz()
-    X = 200
-    Y = 300
+#     X = 200
+#     Y = 300 #받은 좌표
     index = pos_inMask(X,Y,masks)
-    img = load_images(img_path)
+    img = load_images()
     mosaicImage(img,rois,classIds,index)
     
 if __name__== "__main__":
-    main()
+    main(200,300)
    
 

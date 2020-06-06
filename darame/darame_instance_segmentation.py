@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[8]:
+# In[5]:
 
 
 #darame로부터 전경 사진을 전달받아 Mask_RCNN으로 segmentation하여 display
@@ -135,40 +135,35 @@ def display_instances(image, boxes, masks, class_ids, class_names,
     if auto_show:
         Image.fromarray(masked_image.astype(np.uint8)).save('output/display_maskes.png')
 
-def load_foreground(foreground_path):
-    try:
-        foreground= glob.glob(foreground_path+'/*.jpg')[0]
-    except:
-        foreground= glob.glob(foreground_path+'/*.png')[0]
-
-    foreground = load_img(foreground)
-
-    return foreground
-
-def do_MRCNN(model_path, foreground_path , config , class_names):
+def do_MRCNN(model_path , config , class_names, fname):
     
-    foreground = load_foreground(foreground_path)
+    img = load_img('img/'+ fname)
 
     model = modellib.MaskRCNN(mode="inference", config=config, model_dir=model_path)
 
     model.load_weights('mask_rcnn_coco.h5', by_name=True)
 
-    foreground_ = img_to_array(foreground)
+    img_ = img_to_array(img)
     
-    results = model.detect([foreground_], verbose=0) 
+    results = model.detect([img_], verbose=0) 
     
     r = results[0]
     
-    display_instances(foreground_, r['rois'], r['masks'], r['class_ids'], class_names, r['scores'])
+    display_instances(img_, r['rois'], r['masks'], r['class_ids'], class_names, r['scores'])
     
     #pyplot.savefig('output/display_maskes.png', bbox_inches='tight')
     
     return r
 
 
-def main():
+def main(mosaic):
     model_path='C:/Users/user/anaconda3/Lib/site-packages/Mask_RCNN'
-    foreground_path='img/foreground'    
+    
+    # mosaic에서 넘어온거면 mosaic==True, composite에서 넘어온거면 mosaic==False
+    
+    if mosaic : fname="mosaic.png"
+    else :
+        fname="foreground.png"
 
     class myMaskRCNNConfig(Config):
         # give the configuration a recognizable name
@@ -202,10 +197,11 @@ def main():
     
     config = myMaskRCNNConfig() 
     
-    result = do_MRCNN(model_path, foreground_path, config, class_names)
+    result = do_MRCNN(model_path, config, class_names, fname)
 
     np.savez('result.npz', rois=result['rois'], masks=result['masks'], classId=result['class_ids'])
     
 if __name__== "__main__":
-    main()
+    main(mosaic=True)
+    #main(mosaic=False)
 
