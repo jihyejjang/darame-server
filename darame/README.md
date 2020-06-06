@@ -26,12 +26,16 @@
 
 3. darame_server_mosaicAct.py 에서 소켓통신
  
-> 앱 -> 서버로 사용자가 선택한 모자이크할 이미지를 img폴더에 "mosaic.png"라는 이름으로 저장한다. 이미지 합성을 하려면 darame_instance_segmentation(mosaic=False) 를 입력해줘야함!!
+앱 -> 서버로 사용자가 선택한 모자이크할 이미지를 img폴더에 "mosaic.png"라는 이름으로 저장한다. 이미지 합성을 하려면 darame_instance_segmentation(mosaic=False) 를 입력해줘야함!!
 
-> 서버 -> 앱 으로 이미지에 mask를 검출한 결과를 display
+서버 -> 앱 으로 이미지에 mask를 검출한 결과를 display
 
-> 앱 -> 서버로 사용자가 원하는 mask를 터치한 X,Y send
+앱 -> 서버로 사용자가 원하는 mask를 터치한 X,Y send
 
-> 서버 -> 앱으로 최종 결과 
+서버 -> 앱으로 최종 결과 display
+
+##issue
+
+사이즈가 너무 큰 이미지를 전송하면 python에서 90도 회전시켜서 저장함..
 
  
