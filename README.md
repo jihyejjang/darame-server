@@ -7,7 +7,7 @@
  
  - 안드로이드(사진 선택) <-> 파이썬(사진 처리 및 전송)
  
- - [어플 구현 ](https://github.com/jihyejjang/darame-app)
+ - [어플 구현 보러가기](https://github.com/jihyejjang/darame-app)
  
 ## 📱 Darame server
 
