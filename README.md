@@ -1,13 +1,11 @@
 # CNN-PhotoEditor-App
-### 데이터 상생플러스 스터디 CNN을 활용한 사진 배경 합성/ 모자이크 앱 2020.4.13~6.5
-
- - 약 2달가량 CNN, 그 이후 android 개발을 처음으로 접해보았는데 어플리케이션 프로그래밍은 어렵지 않았으나 소켓 통신이 매우 난해했음
+### 데이터 상생플러스 스터디 CNN Image segmentation을 활용한 사진 배경 합성/ 모자이크 앱 2020.4.13~6.5
  
- - CNN으로 image segmentation에 대해 스터디: segmentation모델로 사람을 선택하고, 선택한 사람 이외/선택한 사람만 처리하는 기능에 집중해서 구현
+ - CNN으로 image segmentation에 대해 스터디: segmentation모델로 사람을 선택하고, 선택한 사람 이외/선택한 사람만 처리하는 기능구현
  
  - pre-trained MASK RCNN모델을 활용해 이미지가 입력되면 기능이 적용된 이미지가 출력되는 pipline으로 사용할 수 있게 함수를 만들고 코드를 정리하는 작업을 진행
  
- - 안드로이드와 파이썬을 연결하는 소켓 프로그램을 처음 접했는데 안드로이드 ->파이썬으로 사진 전송은 성공했지만 파이썬 ->안드로이드로 전송은 실패ㅜㅜ
+ - 안드로이드(사진 선택) <-> 파이썬(사진 처리 및 전송)
  
  - [어플 구현](https://github.com/jihyejjang/darame-app)
 
@@ -180,10 +178,10 @@ class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
  </code>
  </pre>
  
-**Mask-RCNN을 활용한 배경 합성과, 모자이크 메인함수는 darame_mosaic.py , darame_composite.py에 저장 
-6주차 이후~ Android studio를 활용하여 py와 소켓통신하는 앱 개발**
+Mask-RCNN을 활용한 배경 합성과, 모자이크 메인함수는 darame_mosaic.py , darame_composite.py에 저장  
+6주차 이후~ Android studio를 활용하여 py와 소켓통신하는 앱 개발  
  
-#### References
+### References
 
 **Semantic Segmentation**
 
