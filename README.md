@@ -7,7 +7,7 @@
  
  - 안드로이드(사진 선택) <-> 파이썬(사진 처리 및 전송)
  
- - [어플 구현](https://github.com/jihyejjang/darame-app)
+ - [어플 구현 ](https://github.com/jihyejjang/darame-app)
  
 ## 📱 Darame server
 
@@ -44,7 +44,7 @@
 
 서버 -> 앱으로 최종 결과 display
 
-## 🔧 issue
+### 🔧 issue
 
 사이즈가 너무 큰 이미지를 전송하면 python에서 90도 회전시켜서 저장함
 
