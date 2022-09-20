@@ -1,5 +1,4 @@
 # darame application
-----
 
 ## folder
 
@@ -8,7 +7,7 @@
 - output : darame에 전송할 image segmentation의 결과와 mosaic/composite의 최종결과 저장 폴더
 
 
-## .py
+## python files
 
 - darame_image_segmentation.py : 'img/foreground.png or mosaic.png'를 input으로 받아 image segmentaion을 수행한 후, 결과 이미지를 output에 저장하고 mask, box, classid 배열을 .npz 파일로 저장
 
@@ -26,7 +25,7 @@
 
 3. darame_server_mosaicAct.py 에서 소켓통신
  
-앱 -> 서버로 사용자가 선택한 모자이크할 이미지를 img폴더에 "mosaic.png"라는 이름으로 저장한다. 이미지 합성을 하려면 darame_instance_segmentation(mosaic=False) 를 입력해줘야함!!
+앱 -> 서버로 사용자가 선택한 모자이크할 이미지를 img폴더에 "mosaic.png"라는 이름으로 저장한다. 이미지 합성을 하려면 darame_instance_segmentation(mosaic=False) 를 입력해줘야함
 
 서버 -> 앱 으로 이미지에 mask를 검출한 결과를 display
 
@@ -36,6 +35,6 @@
 
 ## issue
 
-사이즈가 너무 큰 이미지를 전송하면 python에서 90도 회전시켜서 저장함..
+사이즈가 너무 큰 이미지를 전송하면 python에서 90도 회전시켜서 저장함
 
  
